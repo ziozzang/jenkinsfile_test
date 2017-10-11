@@ -37,6 +37,9 @@ pipeline {
     //disableConcurrentBuilds()
     //skipDefaultCheckout(true)
     //timeout(time: 5, unit: 'MINUTES')
+    
+    // Only keep the 10 most recent builds
+    //buildDiscarder(logRotator(numToKeepStr:'10'))
   }
   // 빌드 단계
   stages {
@@ -91,10 +94,18 @@ pipeline {
       }
     }
     stage('Build Docker') {
+      /*
       agent {
         dockerfile {
           additionalBuildArgs '--build-arg foo=bar'
           dir 'someSubDir'
+        }
+      }
+      */
+      agent {
+        docker {
+          image 'maven:3-alpine'
+          args '-v $HOME/.m2:/root/.m2'
         }
       }
       steps {
@@ -220,12 +231,31 @@ pipeline {
           }
         }
       }
+      steps {
+        retry(3) {
+          sh './flakey-deploy.sh'
+        }
+        timeout(time: 3, unit: 'MINUTES') {
+          sh './health-check.sh'
+        }
+      }
     }
   }
   post {
     always {
       archive 'build/libs/**/*.jar'
+      //archive includes: 'pkg/*.gem'
       junit 'build/reports/**/*.xml'
+      
+      // publish html
+      publishHTML target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: false,
+        keepAll: true,
+        reportDir: 'coverage',
+        reportFiles: 'index.html',
+        reportName: 'RCov Report'
+      ]
     }
   }
 }
