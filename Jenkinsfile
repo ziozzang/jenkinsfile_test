@@ -33,11 +33,22 @@ node('docker') {
         sh 'python --version'
         sh '/sbin/ifconfig'
         sh 'cat /etc/*release'
+
+        // 주: Nested stage는 실행되지 않음. 아래 stage는 무시 됨
         stage('Docker Inner Test') {
-            sh 'python --version'
+          sh 'python --version'
         }
       }
       sh 'docker ps'
+    }
+    // 아래처럼 사용 할수도 있음.
+    docker.image('base').inside {
+      stage('Docker Inner #1') {
+        sh 'python --version'
+      }
+      stage('Docker Inner #2') {
+        sh 'python --version'
+      }
     }
     
     // 아티팩트 저장
