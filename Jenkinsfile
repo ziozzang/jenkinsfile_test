@@ -76,21 +76,15 @@ node('docker') {
   
   //=============================================
   stage('Build') {
-    steps {
-      echo 'Building'
-    }
+    echo 'Building'
   }
   stage('Test') {
-    steps {
-      echo 'Testing'
-    }
+    echo 'Testing'
   }
   stage('Sanity check') {
     input "Does the staging environment look ok?"
   }
   stage('Deploy') {
-    steps {
-      echo 'Deploying'
-    }
+    echo 'Deploying'
   }
 }
