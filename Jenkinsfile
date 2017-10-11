@@ -1,6 +1,8 @@
 
 node {
   stage('Phase1') {
-    sh 'docker build base'
+    sh 'pwd'
+    sh 'df -h'
+    sh 'ls -al'
   }
 }
