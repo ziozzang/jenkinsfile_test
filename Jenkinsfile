@@ -9,7 +9,7 @@ node('docker') {
     // 환경 변수 사용
     stage('Check Environments') {
       sh 'printenv'
-      echo 'ENV: ${DB_ENGINE}'
+      echo "ENV: ${DB_ENGINE}"
       sh 'pwd'
       sh 'df -h'
       sh 'ls -al'
