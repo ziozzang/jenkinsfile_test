@@ -1,17 +1,24 @@
+//Jenkinsfile (Scripted Pipeline)
 node('docker') {
   // 소스 코드 체크아웃 합니다.
   checkout scm
   
   // 환경 체크를 진행 함.
-  stage('Check Environments') {
-    sh 'pwd'
-    sh 'df -h'
-    sh 'ls -al'
-    // multiple lines
-    sh '''
-            echo "Multiline shell steps works too"
-            ls -lah
-        '''
+  withEnv(['DISABLE_AUTH=true',
+           'DB_ENGINE=sqlite']) {
+    // 환경 변수 사용
+    stage('Check Environments') {
+      sh 'printenv'
+      echo 'ENV: ${DB_ENGINE}'
+      sh 'pwd'
+      sh 'df -h'
+      sh 'ls -al'
+      // multiple lines
+      sh '''
+              echo "Multiline shell steps works too"
+              ls -lah
+          '''
+    }
   }
 
   // 도커 이미지를 클린업 합니다.
