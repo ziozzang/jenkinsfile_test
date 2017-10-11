@@ -1,14 +1,20 @@
 node('docker') {
   checkout scm
-  stage('Phase1') {
+  stage('Check Environments') {
     sh 'pwd'
     sh 'df -h'
     sh 'ls -al'
   }
-/*  stage('Build') {
-        docker.image('python:3.5.1').inside {
-            sh 'python --version'
-        }
+  stage('Docker Cleanup Phase') {
+    sh 'docker rm -f base_run'
+    sh 'docker rmi -f base'
+  }
+  stage('Build Test') {
+    sh 'docker build -t base base'
+  }
+  stage('Image Test') {
+    docker.image('base').inside {
+      sh 'python --version'
     }
-*/
+  }
 }
