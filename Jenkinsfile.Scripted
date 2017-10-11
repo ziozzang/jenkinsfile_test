@@ -1,4 +1,5 @@
 //Jenkinsfile (Scripted Pipeline)
+// 도커 빌드 관련: https://jenkins.io/doc/book/pipeline/docker/
 node('docker') {
   // 소스 코드 체크아웃 합니다.
   checkout scm
