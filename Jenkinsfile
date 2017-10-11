@@ -6,8 +6,9 @@ node('docker') {
     sh 'ls -al'
   }
   stage('Docker Cleanup Phase') {
-    sh 'docker rm -f base_run'
-    sh 'docker rmi -f base'
+    // Clean up docker
+    sh 'docker rm -f base_run || true'
+    sh 'docker rmi -f base || true'
   }
   stage('Build Test') {
     sh 'docker build -t base base'
