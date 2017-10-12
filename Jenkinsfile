@@ -35,7 +35,12 @@ pipeline {
   // Stages에 매칭이 됨
   post {
     always {
-      echo 'One way or another, I have finished'
+      stage('Purge #1') {
+        echo 'One way or another, I have finished'
+      }
+      stage('Purge #2') {
+        echo 'One way or another, I have finished'
+      }
     }
   }
   
