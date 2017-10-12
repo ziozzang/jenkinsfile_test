@@ -19,6 +19,20 @@ pipeline {
     stage('Clone Source') {
       steps {
         checkout([$class: 'GitSCM'])
+        /*
+        script {
+          // For Gerrit
+          // https://wiki.jenkins.io/display/JENKINS/Gerrit+Trigger#GerritTrigger-PipelineJobs
+          git url: '<gerrit-git-repo-url>'
+ 
+          // Fetch the changeset to a local branch using the build parameters provided to the
+          // build by the Gerrit plugin...
+          def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
+          sh "git fetch origin ${GERRIT_REFSPEC}:${changeBranch}"
+          sh "git checkout ${changeBranch}"
+
+        }
+        */
         sh """
           ls -al
           df -h
