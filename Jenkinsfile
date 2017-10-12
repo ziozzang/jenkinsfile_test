@@ -10,9 +10,6 @@ pipeline {
       label 'docker'
     }
   }
-  // Global Variable
-  environment {
-  }
   // using the Timestamper plugin we can add timestamps to the console log
   options {
     timestamps()
@@ -44,9 +41,9 @@ pipeline {
         // complex global variables (with properties or methods) can only be run in a script block
         // env variables can also be set within a script block
         script {
-          foo = docker.image('ubuntu')
-          env.bar = "${foo.imageName()}"
-          echo "foo: ${foo.imageName()}"
+          //foo = docker.image('ubuntu')
+          //env.bar = "${foo.imageName()}"
+          //echo "foo: ${foo.imageName()}"
         }
       }
     }
