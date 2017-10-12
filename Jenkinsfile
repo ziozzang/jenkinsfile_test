@@ -33,6 +33,11 @@ pipeline {
 
         }
         */
+        /*
+        repo init -u git://gerrit.mycompany.net/mymanifest.git
+        repo sync
+        repo download $GERRIT_PROJECT $GERRIT_CHANGE_NUMBER/$GERRIT_PATCHSET_NUMBER
+        */
         sh """
           ls -al
           df -h
