@@ -35,18 +35,6 @@ pipeline {
   }
   
   stages {
-    stage('foo') {
-      steps {
-        // variable assignment (other than environment variables) can only be done in a script block
-        // complex global variables (with properties or methods) can only be run in a script block
-        // env variables can also be set within a script block
-        script {
-          //foo = docker.image('ubuntu')
-          //env.bar = "${foo.imageName()}"
-          //echo "foo: ${foo.imageName()}"
-        }
-      }
-    }
     stage('Sanity check') {
       steps {
         input "Does the staging environment look ok?"
