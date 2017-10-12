@@ -35,7 +35,7 @@ pipeline {
   }
   
   stages {
-    stage("foo") {
+    stage('foo') {
       steps {
         // variable assignment (other than environment variables) can only be done in a script block
         // complex global variables (with properties or methods) can only be run in a script block
