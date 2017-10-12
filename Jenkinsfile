@@ -26,6 +26,11 @@ pipeline {
         sh 'who'
       }
     }
+    stage('Sanity check') {
+      steps {
+        input "Does the staging environment look ok?"
+      }
+    }
   }
   // Stages에 매칭이 됨
   post {
@@ -34,11 +39,4 @@ pipeline {
     }
   }
   
-  stages {
-    stage('Sanity check') {
-      steps {
-        input "Does the staging environment look ok?"
-      }
-    }
-  }
 }
