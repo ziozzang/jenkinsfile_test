@@ -19,7 +19,7 @@ pipeline {
   }
   // 빌드 단계
   stages {
-    stage("Clone Source") {
+    stage('Clone Source') {
       steps {
         checkout([$class: 'GitSCM'])
       }
