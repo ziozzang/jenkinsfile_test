@@ -22,8 +22,6 @@ pipeline {
     stage('Clone Source') {
       steps {
         checkout([$class: 'GitSCM'])
-      }
-      steps {
         sh """
           ls -al
           df -h
